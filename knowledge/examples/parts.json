@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "title": "Типовые детали для проверки расчёта",
+    "source": "Типовые детали кузнечно-штамповочного производства",
+    "note": "Размеры условные, подобраны так, чтобы охватить характерные случаи: протяжка, осадка, прошивка отверстия, призматическая поковка"
+  },
+  "parts": [
+    {
+      "name": "Вал ступенчатый",
+      "designation": "ДП.01.001",
+      "part_type": "shaft",
+      "material_grade": "45",
+      "annual_program": 3000,
+      "envelope_kind": "cylinder",
+      "roughness_ra_um": 3.2,
+      "primitives": [
+        {
+          "kind": "cylinder",
+          "d": 60,
+          "l": 120,
+          "name": "шейка левая"
+        },
+        {
+          "kind": "cylinder",
+          "d": 80,
+          "l": 200,
+          "name": "средняя ступень"
+        },
+        {
+          "kind": "cylinder",
+          "d": 50,
+          "l": 90,
+          "name": "шейка правая"
+        }
+      ]
+    },
+    {
+      "name": "Фланец",
+      "designation": "ДП.01.002",
+      "part_type": "flange",
+      "material_grade": "20",
+      "annual_program": 8000,
+      "envelope_kind": "cylinder",
+      "primitives": [
+        {
+          "kind": "cylinder",
+          "d": 200,
+          "l": 25,
+          "name": "диск"
+        },
+        {
+          "kind": "cylinder",
+          "d": 80,
+          "l": 25,
+          "name": "центральное отверстие",
+          "subtract": true
+        }
+      ]
+    },
+    {
+      "name": "Шестерня (диск с отверстием)",
+      "designation": "ДП.01.003",
+      "part_type": "gear",
+      "material_grade": "40Х",
+      "annual_program": 25000,
+      "envelope_kind": "cylinder",
+      "heating": "induction",
+      "primitives": [
+        {
+          "kind": "cylinder",
+          "d": 180,
+          "l": 40,
+          "name": "обод"
+        },
+        {
+          "kind": "cylinder",
+          "d": 90,
+          "l": 30,
+          "name": "ступица"
+        },
+        {
+          "kind": "cylinder",
+          "d": 45,
+          "l": 70,
+          "name": "центральное отверстие",
+          "subtract": true
+        }
+      ]
+    },
+    {
+      "name": "Кольцо",
+      "designation": "ДП.01.004",
+      "part_type": "ring",
+      "material_grade": "45",
+      "annual_program": 6000,
+      "envelope_kind": "cylinder",
+      "primitives": [
+        {
+          "kind": "tube",
+          "d": 220,
+          "d_inner": 140,
+          "l": 50,
+          "name": "кольцо"
+        }
+      ]
+    },
+    {
+      "name": "Рычаг",
+      "designation": "ДП.01.005",
+      "part_type": "lever",
+      "material_grade": "40Х",
+      "annual_program": 1500,
+      "envelope_kind": "box",
+      "primitives": [
+        {
+          "kind": "box",
+          "a": 220,
+          "b": 60,
+          "c": 30,
+          "name": "тело рычага"
+        },
+        {
+          "kind": "cylinder",
+          "d": 70,
+          "l": 40,
+          "along_axis": false,
+          "name": "бобышка"
+        }
+      ]
+    }
+  ]
+}

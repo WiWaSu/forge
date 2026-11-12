@@ -1,0 +1,323 @@
+{
+  "_meta": {
+    "title": "Справочник операций кузнечно-штамповочного производства (белый список для валидации ответа нейросети)",
+    "source": "ГОСТ 3.1118-82, классификатор технологических операций ЕСТД; Ковка и штамповка: справочник под ред. Е.И. Семёнова",
+    "verified": false,
+    "todo": "Проставить коды операций по классификатору ЕСТД (поле code_estd) — сверить по классификатору 1 85 151",
+    "note": "Нейросеть обязана выбирать операции ТОЛЬКО из этого списка. Любая операция вне списка -> ошибка валидации и повторный запрос. Формулировки переходов выправлены по замечаниям практикующего технолога (25.09.2026): «установить», а не «уложить»; «прошить перемычку», а не «пробить»; «на воздухе»; без слова «обода»."
+  },
+  "processes": [
+    {
+      "code": "die_forging_hammer",
+      "name_ru": "Горячая объёмная штамповка на молоте",
+      "typical_for": [
+        "серийное производство",
+        "поковки массой 0,5...100 кг"
+      ]
+    },
+    {
+      "code": "die_forging_press",
+      "name_ru": "Горячая объёмная штамповка на КГШП",
+      "typical_for": [
+        "крупносерийное и массовое производство"
+      ]
+    },
+    {
+      "code": "die_forging_hcm",
+      "name_ru": "Штамповка на ГКМ",
+      "typical_for": [
+        "стержень с утолщением",
+        "кольца, втулки"
+      ]
+    },
+    {
+      "code": "free_forging",
+      "name_ru": "Свободная ковка",
+      "typical_for": [
+        "единичное и мелкосерийное производство",
+        "крупные поковки"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "code": "005_cut",
+      "name_ru": "Заготовительная (резка)",
+      "code_estd": null,
+      "equipment": [
+        "saw"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Установить заготовку на пилу, отрезать в размер",
+        "Контролировать длину заготовки"
+      ]
+    },
+    {
+      "code": "010_heat",
+      "name_ru": "Нагревательная",
+      "code_estd": null,
+      "equipment": [
+        "furnace_flame",
+        "furnace_induction"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Загрузить заготовку в нагреватель",
+        "Нагреть заготовку до температуры начала ковки",
+        "Выдержать заготовку в печи до ковочной температуры",
+        "Температурный интервал деформации"
+      ]
+    },
+    {
+      "code": "015_upset",
+      "name_ru": "Осадка",
+      "code_estd": null,
+      "equipment": [
+        "hammer_die",
+        "press_crank",
+        "hammer_forge",
+        "press_hydraulic"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "free_forging"
+      ],
+      "transitions": [
+        "Установить заготовку в ручей штампа",
+        "Осадить заготовку",
+        "Контролировать диаметр и толщину поковки"
+      ]
+    },
+    {
+      "code": "020_draw",
+      "name_ru": "Протяжка",
+      "code_estd": null,
+      "equipment": [
+        "hammer_forge",
+        "press_hydraulic",
+        "hammer_die"
+      ],
+      "processes": [
+        "free_forging",
+        "die_forging_hammer"
+      ],
+      "transitions": [
+        "Установить заготовку на бойки",
+        "Протянуть на размер",
+        "Кантовать на 90 град.",
+        "Контролировать сечение"
+      ]
+    },
+    {
+      "code": "025_preform",
+      "name_ru": "Штамповка предварительная",
+      "code_estd": null,
+      "equipment": [
+        "hammer_die",
+        "press_crank"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press"
+      ],
+      "transitions": [
+        "Установить заготовку в заготовительный ручей",
+        "Формовать",
+        "Переложить в предварительный ручей",
+        "Штамповать предварительно"
+      ]
+    },
+    {
+      "code": "030_finish",
+      "name_ru": "Штамповка окончательная",
+      "code_estd": null,
+      "equipment": [
+        "hammer_die",
+        "press_crank",
+        "hcm"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm"
+      ],
+      "transitions": [
+        "Установить заготовку в окончательный ручей",
+        "Штамповать окончательно",
+        "Отштамповать внутренний диаметр",
+        "Извлечь поковку из ручья"
+      ]
+    },
+    {
+      "code": "035_pierce",
+      "name_ru": "Прошивка",
+      "code_estd": null,
+      "equipment": [
+        "hammer_forge",
+        "press_hydraulic"
+      ],
+      "processes": [
+        "free_forging"
+      ],
+      "transitions": [
+        "Установить поковку на прошивень",
+        "Прошить отверстие, удалить перемычку"
+      ]
+    },
+    {
+      "code": "040_bend",
+      "name_ru": "Гибка",
+      "code_estd": null,
+      "equipment": [
+        "hammer_die",
+        "press_crank"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press"
+      ],
+      "transitions": [
+        "Гнуть по контуру штампа"
+      ]
+    },
+    {
+      "code": "045_trim",
+      "name_ru": "Обрезная (обрезка облоя)",
+      "name_variants": ["Обрезная (обрезка облоя и прошивка перемычки)"],
+      "code_estd": null,
+      "equipment": [
+        "press_trim"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press"
+      ],
+      "transitions": [
+        "Установить поковку на матрицу обрезного штампа",
+        "Обрубить облой",
+        "Прошить отверстие, удалить перемычку"
+      ]
+    },
+    {
+      "code": "050_straighten",
+      "name_ru": "Правка",
+      "code_estd": null,
+      "equipment": [
+        "press_trim",
+        "press_crank",
+        "hammer_die"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "free_forging"
+      ],
+      "transitions": [
+        "Установить поковку на плиту",
+        "Править поковку в горячем состоянии",
+        "Контролировать коробление"
+      ]
+    },
+    {
+      "code": "055_heat_treat",
+      "name_ru": "Термическая (нормализация / отжиг)",
+      "name_variants": ["Термическая (нормализация)", "Термическая (отжиг)", "Термическая (нормализация и отпуск)"],
+      "code_estd": null,
+      "equipment": [
+        "furnace_heat_treat"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Загрузить поковку в печь",
+        "Выдержать поковку в печи",
+        "Охладить на воздухе"
+      ]
+    },
+    {
+      "code": "060_clean",
+      "name_ru": "Очистная (дробемётная)",
+      "code_estd": null,
+      "equipment": [
+        "tumbling",
+        "shot_blast"
+      ],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Установить поковку в галтовочный барабан",
+        "Произвести галтовку, удалить окалину с поверхности поковки"
+      ],
+      "name_variants": [
+        "Очистная (галтовка)"
+      ]
+    },
+    {
+      "code": "065_calibrate",
+      "name_ru": "Калибровочная (чеканка)",
+      "code_estd": null,
+      "equipment": [
+        "press_crank"
+      ],
+      "processes": [
+        "die_forging_press"
+      ],
+      "transitions": [
+        "Калибровать поковку",
+        "Контроль размеров"
+      ]
+    },
+    {
+      "code": "070_control",
+      "name_ru": "Контрольная",
+      "code_estd": null,
+      "equipment": [],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Контролировать размеры по чертежу поковки",
+        "Контролировать твёрдость",
+        "Контролировать отсутствие поверхностных дефектов"
+      ]
+    },
+    {
+      "code": "075_mark",
+      "name_ru": "Маркирование",
+      "code_estd": null,
+      "equipment": [],
+      "processes": [
+        "die_forging_hammer",
+        "die_forging_press",
+        "die_forging_hcm",
+        "free_forging"
+      ],
+      "transitions": [
+        "Маркировать номер плавки и обозначение поковки"
+      ]
+    }
+  ]
+}

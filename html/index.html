@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>FORGE — технологические карты ковки и штамповки</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header>
+  <button class="hbtn" id="btn-hist">Чаты</button>
+  <div class="brand">
+    <h1>FORGE</h1>
+  </div>
+  <div class="pills" id="pills"></div>
+  <button class="hbtn" id="btn-part">Деталь</button>
+  <button class="hbtn" id="btn-lessons" title="Ошибки модели, которые исправил инженер, и уроки из них">Журнал ошибок<span class="lbadge" id="lessons-badge" hidden></span></button>
+  <button class="hbtn" id="btn-update" hidden title="Вышла новая версия FORGE"></button>
+  <button class="hbtn" id="btn-settings" title="Вид, тема и модель, выбранные при первом запуске">Настройки</button>
+</header>
+
+<div id="firstrun" hidden></div>
+
+<div id="dlg" hidden></div>
+
+<main class="ws">
+  <aside class="hist" id="hist">
+    <button class="newchat" id="btn-newchat">＋ Новый чат</button>
+    <input id="hist-q" placeholder="Поиск по чатам…">
+    <div id="hist-list"></div>
+  </aside>
+  <aside class="form-col">
+    <div class="card">
+      <h2>Типовая деталь</h2>
+      <div class="body">
+        <div class="chips" id="samples"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Деталь</h2>
+      <div class="body">
+        <div class="row"><div>
+          <label for="f-name">Наименование</label>
+          <input id="f-name" placeholder="Шестерня">
+        </div></div>
+        <div class="row two">
+          <div><label for="f-desig">Обозначение</label><input id="f-desig" placeholder="ДП.01.001"></div>
+          <div><label for="f-type">Тип</label><select id="f-type"></select></div>
+        </div>
+        <div class="row two">
+          <div><label for="f-mat">Сталь</label><select id="f-mat"></select></div>
+          <div><label for="f-prog">Программа, шт./год</label><input id="f-prog" type="number" min="1" value="5000"></div>
+        </div>
+        <div class="row two">
+          <div><label for="f-ra">Шероховатость Ra, мкм</label><input id="f-ra" type="number" step="0.1" min="0.1" value="6.3"></div>
+          <div><label for="f-heat">Нагрев</label><select id="f-heat">
+            <option value="flame">Пламенная печь</option>
+            <option value="induction">Индукционный</option>
+          </select></div>
+        </div>
+        <div class="row"><label class="check">
+          <input type="checkbox" id="f-machined" checked>
+          Обрабатывается по всем поверхностям
+        </label></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Геометрия</h2>
+      <div class="body">
+        <div id="prims"></div>
+        <div class="chips">
+          <button class="chip" data-add="cylinder">+ цилиндр</button>
+          <button class="chip" data-add="tube">+ труба</button>
+          <button class="chip" data-add="box">+ параллелепипед</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Кто строит маршрут</h2>
+      <div class="body">
+        <div class="modes" id="modes"></div>
+        <label class="check" style="margin-top:10px">
+          <input type="checkbox" id="f-transitions">
+          Раскрыть переходы внутри операций
+        </label>
+        <label class="check" style="margin-top:10px">
+          <input type="checkbox" id="f-pick-model">
+          Выбрать модель
+        </label>
+        <div id="model-pick" hidden>
+          <select id="f-model" title="Промпты настроены под Qwen2.5-7B"></select>
+        </div>
+        <div class="actions">
+          <button class="primary" id="btn-route">Построить маршрут</button>
+          <button id="btn-calc">Только расчёт</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section id="out"></section>
+
+  <aside class="chatcol" id="chat">
+    <div class="chat-head">
+      <div class="t">Инженерный чат <span class="ctag" id="chat-model"></span>
+        <button type="button" class="flag" id="chat-flag" title="Модель ошиблась в маршруте или ответе: записать, как правильно" style="margin-left:auto">Ошибка</button></div>
+      <div class="cmodes" id="chat-modes">
+        <button type="button" class="cmode on" data-mode="explain">Объяснить</button>
+        <button type="button" class="cmode" data-mode="edit">Правка маршрута</button>
+        <button type="button" class="cmode" data-mode="whatif">Что если</button>
+        <button type="button" class="cmode" data-mode="consult">Консультация</button>
+      </div>
+    </div>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="composer">
+      <textarea id="chat-q" placeholder="Вопрос о расчёте…"></textarea>
+      <div class="cfoot"><span class="hint" id="chat-note"></span>
+        <button type="button" class="primary" id="chat-send">Отправить</button></div>
+    </div>
+  </aside>
+</main>
+
+<div id="print-doc"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
